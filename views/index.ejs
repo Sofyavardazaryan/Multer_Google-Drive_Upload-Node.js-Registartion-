@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Google Drive Upload App</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+
+<h1>Google Drive Upload System</h1>
+
+<% if (!loggedIn) { %>
+  <a href="/auth/google">
+    <button>Login with Google</button>
+  </a>
+  <p style="color:red;">Not logged in</p>
+<% } else { %>
+  <p style="color:green;">Logged in with Google</p>
+<% } %>
+
+<hr>
+
+<h2>Register User</h2>
+
+<form action="/register" method="POST">
+  <input type="text" name="name" placeholder="Name" required />
+  <br><br>
+
+  <input type="email" name="email" placeholder="Email" required />
+  <br><br>
+
+  <input type="password" name="password" placeholder="Password" required />
+  <br><br>
+
+  <button type="submit">Register</button>
+</form>
+
+<hr>
+
+<h2>Upload File to Google Drive</h2>
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+  <input type="file" name="avatar" required />
+  <br><br>
+
+  <button type="submit">Upload</button>
+</form>
+
+<hr>
+
+<h2>Users</h2>
+
+<% if (users.length === 0) { %>
+  <p>No users yet</p>
+<% } else { %>
+  <ul>
+    <% users.forEach(user => { %>
+      <li>
+        <strong><%= user.name %></strong> - <%= user.email %>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+</body>
+</html>
