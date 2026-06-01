@@ -1,6 +1,5 @@
 const { google } = require("googleapis");
 const fs = require("fs");
-
 const oauth2Client = new google.auth.OAuth2();
 
 const drive = google.drive({
@@ -12,7 +11,6 @@ async function uploadToDrive(file, tokens) {
   if (!tokens || !tokens.access_token) {
     throw new Error("Missing Google OAuth token");
   }
-
   oauth2Client.setCredentials(tokens);
 
   const response = await drive.files.create({

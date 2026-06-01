@@ -6,7 +6,6 @@ const oauth2Client = new google.auth.OAuth2(
 );
 
 const SCOPES = ["https://www.googleapis.com/auth/drive.file"];
-
 const authUrl = oauth2Client.generateAuthUrl({
   access_type: "offline",
   prompt: "consent",
