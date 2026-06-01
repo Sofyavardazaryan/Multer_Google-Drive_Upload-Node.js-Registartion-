@@ -1,65 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Google Drive Upload App</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Drive Upload System</title>
+
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
 
-<h1>Google Drive Upload System</h1>
+<div class="container">
 
-<% if (!loggedIn) { %>
-  <a href="/auth/google">
-    <button>Login with Google</button>
-  </a>
-  <p style="color:red;">Not logged in</p>
-<% } else { %>
-  <p style="color:green;">Logged in with Google</p>
-<% } %>
+    <h1>Google Drive Upload System</h1>
 
-<hr>
+    <% if (!loggedIn) { %>
+        <div class="auth-section">
+            <a href="/auth/google">
+                <button class="google-btn">
+                    Login with Google
+                </button>
+            </a>
 
-<h2>Register User</h2>
+            <p class="error">
+                Not logged in
+            </p>
+        </div>
+    <% } else { %>
+        <div class="auth-section">
+            <p class="success">
+                ✓ Logged in with Google
+            </p>
+        </div>
+    <% } %>
 
-<form action="/register" method="POST">
-  <input type="text" name="name" placeholder="Name" required />
-  <br><br>
+    <div class="card">
+        <h2>Register User</h2>
 
-  <input type="email" name="email" placeholder="Email" required />
-  <br><br>
+        <form action="/register" method="POST">
 
-  <input type="password" name="password" placeholder="Password" required />
-  <br><br>
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter name"
+                required
+            >
 
-  <button type="submit">Register</button>
-</form>
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter email"
+                required
+            >
 
-<hr>
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
 
-<h2>Upload File to Google Drive</h2>
+            <button type="submit">
+                Register
+            </button>
 
-<form action="/upload" method="POST" enctype="multipart/form-data">
-  <input type="file" name="avatar" required />
-  <br><br>
+        </form>
+    </div>
 
-  <button type="submit">Upload</button>
-</form>
+    <div class="card">
+        <h2>Upload File To Google Drive</h2>
 
-<hr>
+        <form
+            action="/upload"
+            method="POST"
+            enctype="multipart/form-data"
+        >
 
-<h2>Users</h2>
+            <input
+                type="file"
+                name="avatar"
+                required
+            >
 
-<% if (users.length === 0) { %>
-  <p>No users yet</p>
-<% } else { %>
-  <ul>
-    <% users.forEach(user => { %>
-      <li>
-        <strong><%= user.name %></strong> - <%= user.email %>
-      </li>
-    <% }) %>
-  </ul>
-<% } %>
+            <button type="submit">
+                Upload File
+            </button>
+
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Registered Users</h2>
+
+        <% if(users.length === 0){ %>
+
+            <p class="empty">
+                No users found
+            </p>
+
+        <% } else { %>
+
+            <div class="users">
+
+                <% users.forEach(user => { %>
+
+                    <div class="user-card">
+
+                        <div>
+                            <h3><%= user.name %></h3>
+                            <p><%= user.email %></p>
+                        </div>
+
+                    </div>
+
+                <% }) %>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+</div>
 
 </body>
 </html>
